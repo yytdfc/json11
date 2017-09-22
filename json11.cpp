@@ -414,6 +414,14 @@ struct JsonParser final {
         else
           return fail("malformed comment", false);
       }
+      else if (str[i] == '#') { // inline comment
+        i++;
+        // advance until next line, or end of input
+        while (i < str.size() && str[i] != '\n') {
+          i++;
+        }
+        comment_found = true;
+      }
       return comment_found;
     }
 
